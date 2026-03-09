@@ -172,16 +172,6 @@ export const sandbox = {
   },
 }
 
-// Versions of @architect/sandbox did not not define credentials for DynamoDB
-// in sandbox mode.
-export const set = {
-  env() {
-    if (isSandbox())
-      return { AWS_ACCESS_KEY_ID: 'dummy', AWS_SECRET_ACCESS_KEY: 'dummy' }
-    else return {}
-  },
-}
-
 async function seedDb(seedFile: string, dynamoDB: DynamoDBClient) {
   const update = updater('DynamoDB Seed')
   update.start(`Initializing database from "${seedFile}"`)
